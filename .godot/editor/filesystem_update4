@@ -1,0 +1,7 @@
+res://obstacle.tscn
+res://player.tscn
+res://player.gd
+res://main.tscn
+res://background.tscn
+res://game_over_notification.tscn
+res://main.gd

@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://mabg6gbtcf7q"]
+
+[ext_resource type="Script" path="res://obstacle.gd" id="1_dua08"]
+[ext_resource type="Texture2D" uid="uid://dvnfhymduoprn" path="res://assets/box_obstacle.png" id="1_hqwdg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qy3mn"]
+size = Vector2(12, 12)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yl807"]
+load_path = "res://.godot/imported/box_obstacle.png-5fb59a48d4f89e165b6f71ca71874ce6.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q36ff"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54gf3"]
+size = Vector2(1, 77)
+
+[node name="Obstacle" type="Node2D"]
+script = ExtResource("1_dua08")
+
+[node name="BottomBlock" type="Area2D" parent="." groups=["Obstacles"]]
+position = Vector2(0, -8)
+
+[node name="Sprite2D" type="Sprite2D" parent="BottomBlock"]
+texture = ExtResource("1_hqwdg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBlock"]
+shape = SubResource("RectangleShape2D_qy3mn")
+
+[node name="TopBlock" type="Area2D" parent="." groups=["Obstacles"]]
+position = Vector2(0, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopBlock"]
+texture = SubResource("CompressedTexture2D_yl807")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBlock"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_q36ff")
+
+[node name="ScoringArea" type="Area2D" parent="." groups=["ScoringAreas"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoringArea"]
+position = Vector2(12.5, -39.5)
+shape = SubResource("RectangleShape2D_54gf3")

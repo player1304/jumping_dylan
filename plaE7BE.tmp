@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://barrtrjlbu8k3"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_fnvuj"]
+[ext_resource type="Texture2D" uid="uid://d1rd8rn6ybqjh" path="res://assets/monochrome_tilemap_transparent.png" id="1_kvtht"]
+[ext_resource type="AudioStream" uid="uid://3rt4hg670y1b" path="res://assets/first_jump.wav" id="3_jc0ml"]
+[ext_resource type="AudioStream" uid="uid://dv6jh841mpttl" path="res://assets/second_jump.wav" id="4_yg0j0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcbm1"]
+atlas = ExtResource("1_kvtht")
+region = Rect2(17, 204, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyixn"]
+atlas = ExtResource("1_kvtht")
+region = Rect2(51, 255, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odii5"]
+atlas = ExtResource("1_kvtht")
+region = Rect2(68, 238, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he4ur"]
+atlas = ExtResource("1_kvtht")
+region = Rect2(17, 204, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rpka"]
+atlas = ExtResource("1_kvtht")
+region = Rect2(34, 204, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wynar"]
+atlas = ExtResource("1_kvtht")
+region = Rect2(51, 204, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8iva0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcbm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyixn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odii5")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he4ur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rpka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wynar")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8fn3"]
+size = Vector2(12, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bmsw"]
+size = Vector2(10, 10)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_fnvuj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 0)
+sprite_frames = SubResource("SpriteFrames_8iva0")
+animation = &"jump"
+frame = 1
+frame_progress = 0.919307
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(8, 1.5)
+shape = SubResource("RectangleShape2D_i8fn3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 2)
+shape = SubResource("RectangleShape2D_2bmsw")
+
+[node name="FirstJumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jc0ml")
+
+[node name="SecondJumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_yg0j0")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

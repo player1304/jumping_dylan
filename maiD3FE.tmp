@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3d0imln6t3wm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_6e87k"]
+[ext_resource type="PackedScene" uid="uid://chabbp7bsxtkg" path="res://background.tscn" id="1_lrvd8"]
+[ext_resource type="PackedScene" uid="uid://barrtrjlbu8k3" path="res://player.tscn" id="2_fwuqa"]
+[ext_resource type="Texture2D" uid="uid://7dtq3gnuv3oj" path="res://assets/project1490_logo_33_19.png" id="4_l26di"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_6e87k")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_lrvd8")]
+
+[node name="Player" parent="." instance=ExtResource("2_fwuqa")]
+position = Vector2(12, 78)
+
+[node name="SpawnObstacleTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(223, 11)
+texture = ExtResource("4_l26di")
+
+[connection signal="timeout" from="SpawnObstacleTimer" to="." method="_on_spawn_obstacle_timer_timeout"]
